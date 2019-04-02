@@ -11,10 +11,9 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  }
+  { path: 'calculator', loadChildren: './calculator/calculator.module#CalculatorPageModule' },
+  { path: 'smssample', loadChildren: './smssample/smssample.module#SmssamplePageModule' },
+  { path: 'geosample', loadChildren: './geosample/geosample.module#GeosamplePageModule' }
 ];
 
 @NgModule({

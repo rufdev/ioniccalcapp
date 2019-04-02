@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Calculator</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="container">
+        <div class="display">{{ output }}</div>
+        <button ion-button class="operator" (click)="oppClicked('sin')">sin</button>
+        <button ion-button class="operator" (click)="oppClicked('cos')">cos</button>
+        <button ion-button class="operator" (click)="oppClicked('tan')">tan</button>
+        <button ion-button class="operator" (click)="oppClicked('log')">log</button>
+        <button ion-button class="operator" (click)="oppClicked('percent')">%</button>
+        <button ion-button class="operator" (click)="oppClicked('root')">√</button>
+        <button ion-button class="operator" (click)="oppClicked('square')">x²</button>
+        <button ion-button class="operator" (click)="oppClicked('fraction')">1/x</button>
+        <button ion-button class="func"  (click)="clearexpression()">CE</button>
+        <button ion-button class="func"  (click)="clearall()">C</button>
+        <button ion-button class="func"  (click)="backspace()">⌫</button>
+        <button ion-button class="operator" (click)="oppClicked('div')">&divide;</button>
+        <button ion-button class="num" (click)="numClicked('7')">7</button>
+        <button ion-button class="num" (click)="numClicked('8')">8</button>
+        <button ion-button class="num" (click)="numClicked('9')">9</button>
+        <button ion-button class="operator" (click)="oppClicked('mul')">&times;</button>
+        <button ion-button class="num" (click)="numClicked('4')">4</button>
+        <button ion-button class="num" (click)="numClicked('5')">5</button>
+        <button ion-button class="num" (click)="numClicked('6')">6</button>
+        <button ion-button class="operator" (click)="oppClicked('sub')">-</button>
+        <button ion-button class="num" (click)="numClicked('1')">1</button>
+        <button ion-button class="num" (click)="numClicked('2')">2</button>
+        <button ion-button class="num" (click)="numClicked('3')">3</button>
+        <button ion-button class="operator" (click)="oppClicked('add')">+</button>
+        <button ion-button class="func"  (click)="toggleposneg()">±</button>
+        <button ion-button class="num" (click)="numClicked('0')">0</button>
+        <button ion-button class="func"  (click)="addDecimal()">.</button>
+        <button ion-button class="func"  (click)="equals()">=</button>
+    </div>
+</ion-content>
+

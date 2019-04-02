@@ -1,6 +1,8 @@
 {
   "name": "ionicCalcApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "60f90105"
 }

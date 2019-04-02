@@ -1,0 +1,134 @@
+        html,
+        body {
+            font-size: 100%;
+            box-sizing: border-box;
+            background-color: #ffeead;
+        }
+      
+        .container {
+            border: 1px solid #ccc;   /* style the container and add border to the calculator */
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;   /* position the calculator on the center of the screen */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width:80%; /* expands the width of the calculator to 80% */
+            max-width:400px; /* limits the maximum with of the calculator */
+            
+        }
+
+        /* define the grid layout of the calculator using CSS grid */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* define for columns */
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        /* style for the output box of the calculator */
+        .container > div {
+            display: grid;
+            justify-content: end;
+            align-items: center;
+            color: #ffeead;
+            padding: 5px;
+        }
+        
+        .display {
+            grid-column: 1/-1; /* dynamically expand the width of the output box depending on the number of grid columns */
+            background-color: #9a96ce;
+        }
+
+        /* style for the button elements */
+        button {
+            background-color: #fff;
+            border-radius: 3px;
+            border: 1px solid #c4c4c4;
+            background-color: #ffcc5c;
+            color: #ffeead;
+        }
+
+        /* change the color of the button on hover */
+        button:hover {
+            background-color: #f02020;
+        }
+
+        /* style for the operator buttons */
+        .operator {
+            background-color: #6eca9c;
+            color: #ffeead;
+        }
+
+        /* style for the function buttons */
+        .func {
+            background-color: #f0595f;
+            border-color: #b0353a;
+            color: #fff;
+        }
+
+        /* change button color on hover */
+        .operator:hover .func:hover {
+            background-color: #f17377;
+        }
+
+        /* adjusting height and font-size for devices on portrait mode */
+        @media screen and (orientation:portrait) {
+            .container >div{
+                height: 3rem;
+                font-size: 2rem;
+               
+            }
+            button{
+                height: 3rem;
+                font-size: 2rem;
+            }
+            
+        }
+
+        /* adjusting height and font-size for devices up to 320px width resolution */
+        @media  (max-width:320px) and (orientation:portrait) {
+            .container >div{
+                height: 2rem;
+                font-size: 1rem;
+               
+            }
+            button{
+                height: 2rem;
+                font-size: 1rem;
+            }
+            
+        }
+
+        /* adjusting height and font-size for devices with a minimum 568px width resolution */
+        @media (min-width:568px) and (orientation:landscape) {
+            .container >div{
+                height: 1rem;
+                font-size: 1rem;
+            }
+            
+        }
+
+        /* adjusting height and font-size for devices with a minimum 731px width resolution */
+        @media (min-width:731px) and (orientation:landscape) {
+            .container >div{
+                height: 2rem;
+                font-size: 1rem;
+            }
+           
+            
+        }
+
+        /* adjusting height and font-size for devices with a minimum 1024px width resolution */
+        @media (min-width:1024px) and (orientation:landscape) {
+            .container >div{
+                height: 3rem;
+                font-size: 2rem;
+               
+            }
+            button{
+                height: 3rem;
+                font-size: 2rem;
+            }
+           
+            
+        }
