@@ -29,7 +29,6 @@
     "@ionic/angular": "^4.1.0",
     "@ionic/pro": "2.0.4",
     "cordova-android": "8.0.0",
-    "cordova-browser": "6.0.0",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "4.0.1",
@@ -38,7 +37,6 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-windows": "^7.0.0",
     "core-js": "^2.5.4",
     "hazems-cordova-plugin-sms": "git+https://github.com/hazems/cordova-sms-plugin.git",
     "rxjs": "~6.3.3",
@@ -87,9 +85,7 @@
       "com.jsmobile.plugins.sms": {}
     },
     "platforms": [
-      "browser",
-      "android",
-      "windows"
+      "android"
     ]
   }
 }
