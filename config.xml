@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>IS207</name>
-    <description>This app is in completion of the Midterm Assignment for IS 207.</description>
+<widget id="ruf.dev" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>CMSC207</name>
+    <description>This app is in completion of the Midterm Assignment for CMSC 207.</description>
     <author email="reaguilar2@up.edu.ph">Rufino John Aguilar</author>
     <content src="index.html" />
     <access origin="*" />
@@ -85,4 +85,6 @@
     <allow-navigation href="http://localhost:8100" sessionid="70baaecd" />
     <allow-navigation href="http://192.168.1.3:8100" sessionid="6d7a5816" />
     <allow-navigation href="http://192.168.1.12:8100" sessionid="443d7269" />
+    <allow-navigation href="http://10.30.0.75:8100" sessionid="289fbaa9" />
+    <allow-navigation href="http://192.168.1.4:8100" sessionid="ab34fbd8" />
 </widget>

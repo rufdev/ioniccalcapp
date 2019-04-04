@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-card>
     <ion-card-header color="primary">
       <ion-card-title>
@@ -15,17 +15,46 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content color="secondary">
-      <ion-item>
-        <ion-label position="floating">Enter Mobile No.</ion-label>
-        <ion-input type="text" required="true"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Enter Message</ion-label>
-        <ion-textarea type="text"></ion-textarea>
-      </ion-item>
-
-      <ion-button expand="full" (click)="send()">Send</ion-button>
+      <form [formGroup]="smsForm">
+        <ion-item>
+          <ion-label position="floating">Enter Mobile No.</ion-label>
+          <ion-input formControlName="mobileno" type="text"></ion-input>
+        </ion-item>
+        <div class="error_messages">
+          <ng-container *ngFor="let error of error_messages.mobileno">
+            <div
+              class="error-message"
+              *ngIf="
+                smsForm.get('mobileno').hasError(error.type) &&
+                (smsForm.get('mobileno').dirty ||
+                  smsForm.get('mobileno').touched)
+              "
+            >
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Enter Message</ion-label>
+          <ion-textarea formControlName="message" type="text"></ion-textarea>
+        </ion-item>
+        <div class="error_messages">
+          <ng-container *ngFor="let error of error_messages.message">
+            <div
+              class="error-message"
+              *ngIf="
+                smsForm.get('message').hasError(error.type) &&
+                (smsForm.get('message').dirty || smsForm.get('message').touched)
+              "
+            >
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-button [disabled]="!smsForm.valid" expand="full" (click)="send()"
+          >Send</ion-button
+        >
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-geosample',
@@ -10,24 +11,65 @@ import { ToastController } from '@ionic/angular';
 export class GeosamplePage implements OnInit {
   lon: any;
   lat: any;
-  constructor(private geolocation: Geolocation) { }
+  constructor(private geolocation: Geolocation,
+    public alertController: AlertController,
+    public loadingController: LoadingController
+    ) { }
 
-  ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+  async ngOnInit() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Getting Location. Please wait...',
+      translucent: true
+    });
+    await loading.present();
+
+    this.geolocation.getCurrentPosition().then(async (resp) => {
+      loading.dismiss();
       this.lon = resp.coords.longitude;
       this.lat = resp.coords.latitude;
-    }).catch((error) => {
-      console.log(error);
+      const alert =  await this.alertController.create({
+        header: 'Success',
+        message: 'Location obtained.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }).catch(async (error) => {
+      loading.dismiss();
+      const alert =  await this.alertController.create({
+        header: 'Error',
+        message: 'Unable to get location.',
+        buttons: ['OK']
+      });
+      await alert.present();
     });
   }
 
-  getlocation() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+  async getlocation() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Getting Location. Please wait...',
+      translucent: true
+    });
+    await loading.present();
+    this.geolocation.getCurrentPosition().then(async (resp) => {
+      loading.dismiss();
       this.lon = resp.coords.longitude;
       this.lat = resp.coords.latitude;
-    }).catch((error) => {
-      console.log(error);
+      const alert =  await this.alertController.create({
+        header: 'Success',
+        message: 'Location obtained.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }).catch(async (error) => {
+      loading.dismiss();
+      const alert =  await this.alertController.create({
+        header: 'Error',
+        message: 'Unable to get location.',
+        buttons: ['OK']
+      });
+      await alert.present();
     });
   }
-
 }

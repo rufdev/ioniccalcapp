@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
+
 declare var sms: any;
 
 @Component({
@@ -9,42 +12,74 @@ declare var sms: any;
   styleUrls: ['./smssample.page.scss']
 })
 export class SmssamplePage implements OnInit {
-  mobileno: any;
-  message: any;
+  smsForm: FormGroup;
 
+  error_messages = {
+    'mobileno': [
+      {type: 'required', message: 'Mobile no. is required.'},
+      {type: 'minlength', message: 'Mobile no. length must be no lower than 4 digits.'},
+      {type: 'maxlength', message: 'Mobile no. length must not be greater than 11 digits.'},
+      {type: 'pattern', message: 'Invalid Mobile no.'}
+    ],
+    'message': [
+      {type: 'required', message: 'Message is required.'}
+    ]
+  };
   constructor(
     private androidPermissions: AndroidPermissions,
-    private toastController: ToastController
-  ) {}
+    public alertController: AlertController,
+    public formBuilder: FormBuilder,
+    public loadingController: LoadingController
+  ) {
+    this.smsForm = this.formBuilder.group({
+      mobileno: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(11),
+        Validators.pattern('^((\\+91-?)|0)?[0-9]{11}$')
+      ])),
+      message: new FormControl('', Validators.compose([
+        Validators.required
+      ]))
+    });
+  }
 
   ngOnInit() {
   }
 
   send() {
-    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
-      sms.sendMessage({phoneNumber: this.mobileno, textMessage: this.message}, function(message) {
-        this.success(message);
-      }, function(error) {
-        this.error('code: ' + error.code + ', message: ' + error.message);
+    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(async () => {
+      const loading = await this.loadingController.create({
+        spinner: null,
+        message: 'Sending SMS. Please wait...',
+        translucent: true
       });
-    }).catch((err) => {
-      console.log('error');
+      await loading.present();
+       sms.sendMessage({phoneNumber: this.smsForm.value.mobileno, textMessage: this.smsForm.value.message}, async (msg) => {
+        loading.dismiss();
+        const alert =  await this.alertController.create({
+          header: 'Success',
+          message: msg,
+          buttons: ['OK']
+        });
+        await alert.present();
+        this.smsForm.reset();
+      }, async (err) => {
+        loading.dismiss();
+        const alert =  await this.alertController.create({
+          header: 'Error',
+          message: 'code: ' + err.code + ', message: ' + err.message,
+          buttons: ['OK']
+        });
+        await alert.present();
+      });
+    }).catch(async (err) => {
+      const alert = await this.alertController.create({
+        header: 'SMS Permission Error',
+        message: err.message,
+        buttons: ['OK']
+      });
+      await alert.present();
     });
-  }
-
-  async success(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000
-    });
-    await toast.present();
-  }
-
-  async error(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000
-    });
-    await toast.present();
   }
 }

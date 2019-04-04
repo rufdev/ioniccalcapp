@@ -31,14 +31,12 @@ export class AppComponent {
       url: '/geosample',
       icon: 'locate'
     }
-
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
- 
+    private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
@@ -48,6 +46,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-   
+  }
+
+  exitApp() {
+    navigator['app'].exitApp();
   }
 }
